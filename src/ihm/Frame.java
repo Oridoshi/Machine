@@ -77,8 +77,8 @@ public class Frame extends JFrame implements ActionListener
 		JPanel panelOption = new JPanel();
 		panelOption.setBackground(new Color(31, 31, 31));
 		BtnGrpPerso grpOption = new BtnGrpPerso();
-		grpOption.add(new BtnIconPerso("./img/table/table_(2).png", "./img/data/img/table/table_(1).png", "./data/img/table/table_(3).png", this, "table"));
-		grpOption.add(new BtnIconPerso("./img/eco/eco_(2).png", "./img/data/img/eco/eco_(1).png", "./data/img/eco/eco_(3).png", this, "eco"));
+		grpOption.add(new BtnIconPerso("./data/img/table/table_(2).png", "./data/img/table/table_(1).png", "./data/img/table/table_(3).png", this, "table"));
+		grpOption.add(new BtnIconPerso("./data/img/eco/eco_(2).png"    , "./data/img/eco/eco_(1).png"    , "./data/img/eco/eco_(3).png", this, "eco"));
 		panelOption.add(grpOption.ajouterFrame());
 		this.add(panelOption, BorderLayout.WEST);
 

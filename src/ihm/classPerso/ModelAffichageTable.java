@@ -1,4 +1,4 @@
-package ihm;
+package ihm.classPerso;
 
 import javax.swing.table.AbstractTableModel;
 import controleur.Controleur;
@@ -41,5 +41,5 @@ public class ModelAffichageTable extends AbstractTableModel
 	public String getColumnName (int col)                  {return this.tabEntetes[col];}
 	public int getColumnCount()                            {return this.tabEntetes.length;}
 	public Object getValueAt(int rowIndex, int columnIndex){return this.tabDonnees[rowIndex][columnIndex];}
-	
+
 }

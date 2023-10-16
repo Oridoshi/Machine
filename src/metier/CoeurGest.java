@@ -391,6 +391,7 @@ public class CoeurGest
 	// 		{
 	// 			statement = connexion.prepareStatement("DELETE FROM " + resultSet.getString(1));
 	// 			statement.execute();
+	// 			System.out.println("DEBUG : SUPPRESSION TABLE " + tableName + " REUSIT");
 	// 		}
 
 	// 		resultSet.close();

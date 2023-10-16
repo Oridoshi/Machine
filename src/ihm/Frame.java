@@ -1,6 +1,7 @@
 package ihm;
 
 import javax.swing.AbstractButton;
+import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
@@ -34,6 +35,8 @@ public class Frame extends JFrame implements ActionListener
 		this.setTitle("Gestion Machine");
 
 		this.setDefaultCloseOperation(EXIT_ON_CLOSE);
+
+		this.setIconImage(new ImageIcon("./data/icon/icon.png").getImage());
 
 		Dimension tailleEcran = Toolkit.getDefaultToolkit().getScreenSize();
 

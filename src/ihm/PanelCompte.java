@@ -55,7 +55,7 @@ public class PanelCompte extends JPanel
 
 
 		JLabel labelArgType1 = new JLabel("Argent généré type 1 : ");
-		JLabel ArgMachineType1 = new JLabel(String.format("%3d", nbType1));
+		JLabel ArgMachineType1 = new JLabel(String.format("%3d", nbType1) + "€");
 		gbc.gridx = 0;
 		gbc.gridy = 1;
 		this.add(labelArgType1, gbc);
@@ -66,7 +66,7 @@ public class PanelCompte extends JPanel
 		this.add(new JLabel("    |    "), gbc);
 
 		JLabel labelArgType2 = new JLabel("Argent généré type 2 : ");
-		JLabel ArgMachineType2 = new JLabel(String.format("%3d", argentGenType2));
+		JLabel ArgMachineType2 = new JLabel(String.format("%3d", argentGenType2) + "€");
 		gbc.gridx = 3;
 		gbc.gridy = 1;
 		this.add(labelArgType2, gbc);
@@ -79,7 +79,7 @@ public class PanelCompte extends JPanel
 
 
 		JLabel labelTotGen = new JLabel("Total Argent généré : ");
-		JLabel TotGen = new JLabel(String.format("%3d", argentGenTot));
+		JLabel TotGen = new JLabel(String.format("%3d", argentGenTot) + "€");
 		gbc.gridx = 0;
 		gbc.gridy = 3;
 		this.add(labelTotGen, gbc);

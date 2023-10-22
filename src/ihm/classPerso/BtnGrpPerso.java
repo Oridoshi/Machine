@@ -40,6 +40,16 @@ public class BtnGrpPerso
 		}
 	}
 
+	public BtnPerso getBouttonPerso(String nom)
+	{
+		for (BtnPerso button : groupe) 
+		{
+			if(nom.equals(button.getText()))
+				return button;
+		}
+		return null;
+	}
+
 	public JPanel ajouterFrame()
 	{
 		JPanel JPaneRet = new JPanel();

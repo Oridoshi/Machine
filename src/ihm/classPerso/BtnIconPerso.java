@@ -2,14 +2,13 @@ package ihm.classPerso;
 
 import java.awt.Color;
 import java.awt.Image;
-import java.awt.event.MouseListener;
 
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 
 import ihm.Frame;
 
-public class BtnIconPerso extends BtnPerso implements MouseListener
+public class BtnIconPerso extends BtnPerso
 {
 
 	private final ImageIcon imgHover;
@@ -68,15 +67,6 @@ public class BtnIconPerso extends BtnPerso implements MouseListener
 			setIcon(imgNonSelect);
 		}
 	}
-
-	@Override
-	public void mouseClicked(java.awt.event.MouseEvent e) {}
-
-	@Override
-	public void mousePressed(java.awt.event.MouseEvent e) {}
-
-	@Override
-	public void mouseReleased(java.awt.event.MouseEvent e) {}
 
 	@Override
 	public void mouseEntered(java.awt.event.MouseEvent e)

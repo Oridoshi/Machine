@@ -12,7 +12,7 @@ public class Controleur
 	public Controleur()
 	{
 		this.gestionaire = new CoeurGest();
-
+		this.gestionaire.supCli(12);
 		new Frame(this);
 	}
 	public static void main(String[] args)

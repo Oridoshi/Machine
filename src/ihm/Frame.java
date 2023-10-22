@@ -28,6 +28,8 @@ public class Frame extends JFrame implements ActionListener
 	private JButton boutonAjouterUtilisation;
 	private String panCharger = "";
 
+	private BtnGrpPerso grpTable;
+
 	public Frame(Controleur ctrl)
 	{
 		this.ctrl = ctrl;
@@ -50,15 +52,15 @@ public class Frame extends JFrame implements ActionListener
 		panNord.setBackground(new Color(31, 31, 31));
 		panNord.setLayout(new FlowLayout(FlowLayout.LEFT));
 
-		BtnGrpPerso grpTable = new BtnGrpPerso();
+		this.grpTable = new BtnGrpPerso();
 		for (String table : ctrl.getTable())
 		{
 			BtnPerso tmp = new BtnPerso(table);
 			tmp.addActionListener(this);
 
-			grpTable.add(tmp);
+			this.grpTable.add(tmp);
 		}
-		panNord.add(grpTable.ajouterFrame());
+		panNord.add(this.grpTable.ajouterFrame());
 
 		JPanel panSud = new JPanel();
 		panSud.setBackground(new Color(31, 31, 31));
@@ -67,11 +69,15 @@ public class Frame extends JFrame implements ActionListener
 		this.boutonAjouterClient = new JButton("Ajouter/Mise a jour Client");
 		this.boutonAjouterClient.setForeground(new Color(156, 220, 254));
 		this.boutonAjouterClient.setBackground(new Color(51, 51, 51));
+		this.boutonAjouterClient.setBorderPainted(false);
+		this.boutonAjouterClient.setFocusPainted(false);
 		panSud.add(this.boutonAjouterClient);
 
 		this.boutonAjouterUtilisation = new JButton("Ajouter Utilisation");
 		this.boutonAjouterUtilisation.setForeground(new Color(156, 220, 254));
 		this.boutonAjouterUtilisation.setBackground(new Color(51, 51, 51));
+		this.boutonAjouterUtilisation.setBorderPainted(false);
+		this.boutonAjouterUtilisation.setFocusPainted(false);
 		panSud.add(this.boutonAjouterUtilisation);
 
 		this.boutonAjouterClient.addActionListener(this);
@@ -134,6 +140,7 @@ public class Frame extends JFrame implements ActionListener
 				this.panelCentre = new PanelInfoTable(this.ctrl, "client");
 				this.add(panelCentre, BorderLayout.CENTER);
 				this.panCharger = pan;
+				this.grpTable.btnSelect(this.grpTable.getBouttonPerso("client"));
 			}
 			catch (Exception e)
 			{
@@ -144,6 +151,7 @@ public class Frame extends JFrame implements ActionListener
 			{
 				this.panelCentre = new PanelCompte(this.ctrl);
 				this.panCharger = pan;
+				this.grpTable.btnSelect(null);
 			}
 			catch (Exception e)
 			{

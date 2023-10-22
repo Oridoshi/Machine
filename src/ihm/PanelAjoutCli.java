@@ -7,6 +7,9 @@ import java.awt.GridLayout;
 import java.awt.Insets;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.KeyEvent;
+import java.awt.event.KeyListener;
+
 import javax.swing.JButton;
 import javax.swing.JDialog;
 import javax.swing.JLabel;
@@ -14,7 +17,7 @@ import javax.swing.JPanel;
 import javax.swing.JTextField;
 import controleur.Controleur;
 
-public class PanelAjoutCli extends JPanel implements ActionListener
+public class PanelAjoutCli extends JPanel implements ActionListener, KeyListener
 {
 	private JDialog dial;
 	private JTextField textFieldPrenom;
@@ -51,7 +54,6 @@ public class PanelAjoutCli extends JPanel implements ActionListener
 		panelAction.setLayout(new GridLayout(1, 2));
 		panelAction.add(this.ajCli);
 		panelAction.add(this.misCli);
-		
 		
 		this.dial.add(this.ajout, BorderLayout.SOUTH);
 		this.dial.add(panelAction, BorderLayout.NORTH);
@@ -113,6 +115,9 @@ public class PanelAjoutCli extends JPanel implements ActionListener
 		gbc.gridx = 1;
 		this.panelFormulaire.add(textFieldPrenom, gbc);
 
+		this.textFieldPrenom.addKeyListener(this);
+		this.textFieldNom.addKeyListener(this);
+
 		this.panelFormulaire.revalidate();
 		this.panelFormulaire.repaint();
 
@@ -152,11 +157,35 @@ public class PanelAjoutCli extends JPanel implements ActionListener
 		gbc.gridx = 1;
 		this.panelFormulaire.add(textFieldMontant, gbc);
 
+		this.textFieldMontant.addKeyListener(this);
+		this.textFieldNcli.addKeyListener(this);
+
 		this.panelFormulaire.revalidate();
 		this.panelFormulaire.repaint();
 
 		this.dial.add(this.panelFormulaire, BorderLayout.CENTER);
 		this.dial.revalidate();
 		this.dial.repaint();
+	}
+
+	@Override
+	public void keyTyped(KeyEvent e)
+	{
+			if(this.ajoutClient == true)
+				if(this.textFieldNom.getText().length() > 0 && this.textFieldPrenom.getText().length() > 0)
+					this.ctrl.ajouterCli(this.textFieldNom.getText(), this.textFieldPrenom.getText());
+			else
+				if(this.textFieldNom.getText().length() > 0 && this.textFieldPrenom.getText().length() > 0)
+					this.ctrl.ajouterArgentCli(Integer.parseInt(this.textFieldNcli.getText()), Integer.parseInt(this.textFieldMontant.getText()));
+	}
+
+	@Override
+	public void keyPressed(KeyEvent e)
+	{
+	}
+
+	@Override
+	public void keyReleased(KeyEvent e)
+	{
 	}
 }

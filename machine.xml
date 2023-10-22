@@ -13,7 +13,7 @@
   <stayAlive>false</stayAlive>
   <restartOnCrash>false</restartOnCrash>
   <manifest></manifest>
-  <icon>C:\Users\tom18\OneDrive\Bureau\Machine\data\icon.ico</icon>
+  <icon>C:\Users\tom18\OneDrive\Bureau\Machine\data\icon\icon.ico</icon>
   <jre>
     <path>%JAVA_HOME%;%PATH%</path>
     <requiresJdk>false</requiresJdk>

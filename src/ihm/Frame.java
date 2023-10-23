@@ -163,4 +163,10 @@ public class Frame extends JFrame implements ActionListener
 		this.revalidate();
 	}
 
+	public void majTable()
+	{
+		this.repaint();
+		this.revalidate();
+	}
+
 }

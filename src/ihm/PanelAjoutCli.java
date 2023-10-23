@@ -30,10 +30,12 @@ public class PanelAjoutCli extends JPanel implements ActionListener, KeyListener
 	private Controleur ctrl;
 	private JTextField textFieldMontant;
 	private JTextField textFieldNcli;
+	private Frame mere;
 
 	public PanelAjoutCli(Frame mere, Controleur ctrl)
 	{
 		this.ctrl = ctrl;
+		this.mere = mere;
 
 		this.dial = new JDialog(mere, "Ajout d'un tuple dans une table", true);
 		this.dial.setLayout(new BorderLayout());
@@ -73,7 +75,7 @@ public class PanelAjoutCli extends JPanel implements ActionListener, KeyListener
 			else
 				this.ctrl.ajouterArgentCli(Integer.parseInt(this.textFieldNcli.getText()), Integer.parseInt(this.textFieldMontant.getText()));
 
-
+			this.mere.majTable();
 			this.dial.dispose();
 		}
 		else
@@ -177,6 +179,9 @@ public class PanelAjoutCli extends JPanel implements ActionListener, KeyListener
 			else
 				if(this.textFieldNom.getText().length() > 0 && this.textFieldPrenom.getText().length() > 0)
 					this.ctrl.ajouterArgentCli(Integer.parseInt(this.textFieldNcli.getText()), Integer.parseInt(this.textFieldMontant.getText()));
+
+		this.mere.majTable();
+		this.dial.dispose();
 	}
 
 	@Override

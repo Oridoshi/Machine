@@ -15,14 +15,16 @@ import controleur.Controleur;
 
 public class PanelAjoutUtilisation extends JPanel implements ActionListener
 {
-	private JDialog dial;
+	private JDialog    dial;
 	private JTextField textFieldNcli;
 	private JTextField textFieldType;
 	private Controleur ctrl;
+	private Frame      mere;
 
 	public PanelAjoutUtilisation(Frame mere, Controleur ctrl)
 	{
 		this.ctrl = ctrl;
+		this.mere = mere;
 
 		this.dial = new JDialog(mere, "Ajout d'un tuple dans une table", true);
 		this.dial.setLayout(new BorderLayout());
@@ -69,6 +71,7 @@ public class PanelAjoutUtilisation extends JPanel implements ActionListener
 	public void actionPerformed(ActionEvent e)
 	{
 		this.ctrl.ajouterUtilisation(Integer.parseInt(this.textFieldNcli.getText()), Integer.parseInt(this.textFieldType.getText()));
+		this.mere.majTable();
 		this.dial.dispose();
 	}
 }

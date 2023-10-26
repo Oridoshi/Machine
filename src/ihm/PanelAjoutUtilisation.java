@@ -6,6 +6,9 @@ import java.awt.GridBagLayout;
 import java.awt.Insets;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.KeyEvent;
+import java.awt.event.KeyListener;
+
 import javax.swing.JButton;
 import javax.swing.JDialog;
 import javax.swing.JLabel;
@@ -13,7 +16,7 @@ import javax.swing.JPanel;
 import javax.swing.JTextField;
 import controleur.Controleur;
 
-public class PanelAjoutUtilisation extends JPanel implements ActionListener
+public class PanelAjoutUtilisation extends JPanel implements ActionListener, KeyListener
 {
 	private JDialog    dial;
 	private JTextField textFieldNcli;
@@ -74,4 +77,21 @@ public class PanelAjoutUtilisation extends JPanel implements ActionListener
 		this.mere.majTable();
 		this.dial.dispose();
 	}
+
+	@Override
+	public void keyTyped(KeyEvent e)
+	{
+		if(e.getKeyChar() == KeyEvent.VK_ENTER)
+		{
+			this.ctrl.ajouterUtilisation(Integer.parseInt(this.textFieldNcli.getText()), Integer.parseInt(this.textFieldType.getText()));
+			this.mere.majTable();
+			this.dial.dispose();
+		}
+	}
+
+	@Override
+	public void keyPressed(KeyEvent e){}
+
+	@Override
+	public void keyReleased(KeyEvent e){}
 }

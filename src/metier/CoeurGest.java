@@ -31,10 +31,9 @@ public class CoeurGest
 		int nbTuple = 0;
 
 		try {
-			Statement statement = connexion.createStatement();
-			String sqlQuery = "SELECT COUNT(*) FROM " + table;
+			PreparedStatement statement = connexion.prepareStatement("SELECT COUNT(*) FROM " + table);
 
-			ResultSet resultSet = statement.executeQuery(sqlQuery);
+			ResultSet resultSet = statement.executeQuery();
 
 			resultSet.next();
 			nbTuple = Integer.parseInt(resultSet.getString(1));
@@ -54,13 +53,13 @@ public class CoeurGest
 		int nbCol = 0;
 
 		try {
-			Statement statement = connexion.createStatement();
 			String sqlQuery = "SELECT COUNT(*) " +
 			                  "FROM information_schema.columns " +
 			                  "WHERE table_schema = 'machine' " +
 			                  "AND table_name = '" + table + "';";
+			PreparedStatement statement = connexion.prepareStatement(sqlQuery);
 
-			ResultSet resultSet = statement.executeQuery(sqlQuery);
+			ResultSet resultSet = statement.executeQuery();
 
 			resultSet.next();
 			nbCol = Integer.parseInt(resultSet.getString(1));
@@ -80,12 +79,12 @@ public class CoeurGest
 		String[] tabNomCol = null;
 
 		try {
-			Statement statementRes = connexion.createStatement();
 			String sqlQuery = "SELECT column_name " +
 			                  "FROM information_schema.columns " +
 			                  "WHERE table_schema = 'machine' " +
 			                  "AND table_name = '" + table + "'" +
 			                  "ORDER BY ordinal_position;";
+			PreparedStatement statementRes = connexion.prepareStatement(sqlQuery);
 
 			ResultSet resultSet = statementRes.executeQuery(sqlQuery);
 
@@ -123,11 +122,10 @@ public class CoeurGest
 	{
 		try
 		{
-			Statement statementRes = connexion.createStatement();
-			String sqlQuery = "SELECT * FROM Client where ncli = " + ncli; //DEMANDE
+			PreparedStatement statementRes = connexion.prepareStatement("SELECT * FROM Client where ncli = " + ncli);
 
 			/*RESULTAT DEMANDE*/
-			ResultSet resultSet = statementRes.executeQuery(sqlQuery);
+			ResultSet resultSet = statementRes.executeQuery();
 
 			if(resultSet.next() != false)
 			{
@@ -166,12 +164,12 @@ public class CoeurGest
 
 		try
 		{
-			Statement statementRes = connexion.createStatement();
 			String sqlQuery = "SELECT table_name " +
 							  "FROM information_schema.tables " +
 							  "WHERE table_schema = DATABASE() ";
+			PreparedStatement statementRes = connexion.prepareStatement(sqlQuery);
 
-			ResultSet resultSet = statementRes.executeQuery(sqlQuery);
+			ResultSet resultSet = statementRes.executeQuery();
 
 			tabTable = new String[3];
 			for(int cpt = 0;resultSet.next(); cpt++)
@@ -192,11 +190,10 @@ public class CoeurGest
 		String sRet = null;
 
 		try {
-			Statement statement = connexion.createStatement();
-			String sqlQuery = "SELECT * FROM Client"; //DEMANDE
+			PreparedStatement statement = connexion.prepareStatement("SELECT * FROM Client");
 
 			/*RESULTAT DEMANDE*/
-			ResultSet resultSet = statement.executeQuery(sqlQuery);
+			ResultSet resultSet = statement.executeQuery();
 
 
 			while (resultSet.next()) {
@@ -231,11 +228,10 @@ public class CoeurGest
 		String sRet = null;
 
 		try {
-			Statement statement = connexion.createStatement();
-			String sqlQuery = "SELECT * FROM type"; //DEMANDE
+			PreparedStatement statement = connexion.prepareStatement("SELECT * FROM type");
 
 			/*RESULTAT DEMANDE*/
-			ResultSet resultSet = statement.executeQuery(sqlQuery);
+			ResultSet resultSet = statement.executeQuery();
 
 
 			while (resultSet.next()) {
@@ -267,11 +263,10 @@ public class CoeurGest
 		String sRet = null;
 
 		try {
-			Statement statement = connexion.createStatement();
-			String sqlQuery = "SELECT * FROM utilisation"; //DEMANDE
+			PreparedStatement statement = connexion.prepareStatement("SELECT * FROM utilisation");
 
 			/*RESULTAT DEMANDE*/
-			ResultSet resultSet = statement.executeQuery(sqlQuery);
+			ResultSet resultSet = statement.executeQuery();
 
 
 			while (resultSet.next()) {
@@ -350,12 +345,12 @@ public class CoeurGest
 		int nbCol = 0;
 
 		try {
-			Statement statement = connexion.createStatement();
 			String sqlQuery = "SELECT COUNT(*) " +
 			                  "FROM utilisation " +
 			                  "WHERE nt = " + type + ";";
+			PreparedStatement statement = connexion.prepareStatement(sqlQuery);
 
-			ResultSet resultSet = statement.executeQuery(sqlQuery);
+			ResultSet resultSet = statement.executeQuery();
 
 			resultSet.next();
 			nbCol = Integer.parseInt(resultSet.getString(1));
@@ -379,7 +374,7 @@ public class CoeurGest
 	// 		statement.execute();
 
 
-	// 		Statement statementRes = connexion.createStatement();
+	// 		PreparedStatement statementRes = connexion.createStatement();
 	// 		String sqlQuery = "SELECT table_name " +
 	// 						  "FROM information_schema.tables " +
 	// 						  "WHERE table_schema = DATABASE() ";
@@ -411,10 +406,8 @@ public class CoeurGest
 	// public static void main(String[] args) {
 	// 	CoeurGest reset = new CoeurGest();
 
-	// 	reset.supDonneTable();
+	// 	// reset.supDonneTable();
+	// 	// reset.supCli(13);
 	// 	reset.fermerConnexion();
 	// }
-
-
-	//quelle est l'inconvégniant du second choix au premiere ( demande au voisine état ( doit être sur que chaque voisine a envoyer sont état )/ donne au voisine sont état )
 }

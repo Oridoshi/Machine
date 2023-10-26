@@ -165,8 +165,7 @@ public class Frame extends JFrame implements ActionListener
 
 	public void majTable()
 	{
-		this.repaint();
-		this.revalidate();
+		((PanelInfoTable) this.panelCentre).updateTable();
 	}
 
 }

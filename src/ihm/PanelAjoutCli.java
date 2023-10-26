@@ -173,15 +173,25 @@ public class PanelAjoutCli extends JPanel implements ActionListener, KeyListener
 	@Override
 	public void keyTyped(KeyEvent e)
 	{
+		if(e.getKeyChar() == KeyEvent.VK_ENTER)
+		{
 			if(this.ajoutClient == true)
+			{
 				if(this.textFieldNom.getText().length() > 0 && this.textFieldPrenom.getText().length() > 0)
+				{
 					this.ctrl.ajouterCli(this.textFieldNom.getText(), this.textFieldPrenom.getText());
+					this.mere.majTable();
+					this.dial.dispose();
+				}
+			}
 			else
-				if(this.textFieldNom.getText().length() > 0 && this.textFieldPrenom.getText().length() > 0)
+				if(this.textFieldMontant.getText().length() > 0 && this.textFieldNcli.getText().length() > 0)
+				{
 					this.ctrl.ajouterArgentCli(Integer.parseInt(this.textFieldNcli.getText()), Integer.parseInt(this.textFieldMontant.getText()));
-
-		this.mere.majTable();
-		this.dial.dispose();
+					this.mere.majTable();
+					this.dial.dispose();
+				}
+		}
 	}
 
 	@Override

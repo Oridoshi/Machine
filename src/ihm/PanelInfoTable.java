@@ -12,10 +12,13 @@ public class PanelInfoTable extends JPanel
 {
 	private Controleur ctrl;
 	private JTable     tableDonne;
+	private String     table;
 
 	public PanelInfoTable(Controleur ctrl, String table)
 	{
 		this.ctrl = ctrl;
+		this.table = table;
+
 		this.setLayout(new BorderLayout());
 
 		JScrollPane spDonneTable;
@@ -28,5 +31,10 @@ public class PanelInfoTable extends JPanel
 		spDonneTable = new JScrollPane(this.tableDonne);
 
 		this.add(spDonneTable, BorderLayout.CENTER);
+	}
+
+	public void updateTable()
+	{
+		this.tableDonne.setModel(new ModelAffichageTable(this.ctrl, this.table));
 	}
 }

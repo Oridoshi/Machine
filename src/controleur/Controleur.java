@@ -1,5 +1,6 @@
 package controleur;
 import ihm.Frame;
+import ihm.FrameMaj;
 import metier.*;
 
 /**
@@ -11,9 +12,20 @@ public class Controleur
 
 	public Controleur()
 	{
-		this.gestionaire = new CoeurGest();
-		this.gestionaire.supCli(12);
-		new Frame(this);
+		UpdateChecker verifUpdate = new UpdateChecker();
+
+		if (verifUpdate.isNewVersionAvailable())
+		{
+			FrameMaj frame = new FrameMaj();
+			verifUpdate.update();
+			frame.updateFini();
+		}
+		else
+		{
+			this.gestionaire = new CoeurGest();
+			this.gestionaire.supCli(12);
+			new Frame(this);
+		}
 	}
 	public static void main(String[] args)
 	{

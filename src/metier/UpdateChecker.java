@@ -1,54 +1,72 @@
-package metier;
-import org.json.JSONObject;
+	package metier;
 
+import org.json.JSONObject;
 import java.io.IOException;
-import java.net.HttpURLConnection;
 import java.net.URL;
 import java.util.Scanner;
 
-public class UpdateChecker {
-    public static void main(String[] args) {
-        try {
-            // URL du fichier de configuration JSON
-            String configUrl = "https://github.com/Oridoshi/Machine/blob/main/data/update.json";
+import javax.net.ssl.HttpsURLConnection;
+import java.io.FileInputStream;
 
-            // Récupérer le contenu du fichier JSON
-            String jsonContent = fetchJson(configUrl);
+	public class UpdateChecker
+	{
+		private String currentVersion;
+		private String availableVersion;
 
-            // Analyser le contenu JSON
-            JSONObject jsonObject = new JSONObject(jsonContent);
+		public UpdateChecker()
+		{
+			try {
+				// URL du fichier de configuration JSON
+				String configUrl = "https://github.com/Oridoshi/Machine/raw/main/data/update.json";
 
-            // Extraire la version actuelle de l'application
-            String currentVersion = "1.0.0"; // Vous pouvez obtenir la version actuelle de votre application ici
+				// Récupérer le contenu du fichier JSON
+				String jsonContent = fetchJson(configUrl);
 
-            // Extraire la version disponible dans le fichier JSON
-            String availableVersion = jsonObject.getString("version");
+				// Analyser le contenu JSON
+				JSONObject jsonObject = new JSONObject(jsonContent);
 
-            // Comparer les versions
-            if (isNewVersionAvailable(currentVersion, availableVersion)) {
-                System.out.println("Une nouvelle version (" + availableVersion + ") est disponible.");
-                // Vous pouvez ici déclencher le processus de mise à jour.
-            } else {
-                System.out.println("Votre application est à jour.");
-            }
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-    }
+				// Extraire la version actuelle de l'application
+				this.currentVersion = (new JSONObject(lireFichier("./data/update.json"))).getString("version");
 
-    private static String fetchJson(String url) throws IOException {
-        HttpURLConnection connection = (HttpURLConnection) new URL(url).openConnection();
-        connection.setRequestMethod("GET");
+				// Extraire la version disponible dans le fichier JSON
+				this.availableVersion = jsonObject.getString("version");
 
-        try (Scanner scanner = new Scanner(connection.getInputStream())) {
-            scanner.useDelimiter("\\A");
-            return scanner.hasNext() ? scanner.next() : "";
-        }
-    }
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+		}
 
-    private static boolean isNewVersionAvailable(String currentVersion, String availableVersion) {
-        // Vous pouvez personnaliser cette logique de comparaison selon vos besoins.
-        // Par exemple, vous pouvez diviser les versions en parties (majeure, mineure, correctif) et les comparer individuellement.
-        return !currentVersion.equals(availableVersion);
-    }
-}
+		private static String fetchJson(String url) throws IOException
+		{
+			HttpsURLConnection connection = (HttpsURLConnection) new URL(url).openConnection();
+			connection.setRequestMethod("GET");
+
+			try (Scanner scanner = new Scanner(connection.getInputStream()))
+			{
+				scanner.useDelimiter("\\A");
+				return scanner.hasNext() ? scanner.next() : "";
+			}
+		}
+
+		private static String lireFichier(String nomFichier) throws IOException
+		{
+			try (Scanner scanner = new Scanner(new FileInputStream(nomFichier), "UTF-8"))
+			{
+				scanner.useDelimiter("\\A");
+				return scanner.hasNext() ? scanner.next() : "";
+			}
+		}
+
+		public boolean isNewVersionAvailable()
+		{
+			return !this.currentVersion.equals(this.availableVersion);
+		}
+
+		public void update()
+		{
+			System.out.println("Mise à jour en cours...");
+			System.out.println("Version actuelle : " + this.currentVersion);
+			System.out.println("Version disponible : " + this.availableVersion);
+			new GitHubFileDownloader();
+		}
+	}

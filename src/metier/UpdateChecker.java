@@ -17,7 +17,7 @@ import java.io.FileInputStream;
 		{
 			try {
 				// URL du fichier de configuration JSON
-				String configUrl = "https://github.com/Oridoshi/Machine/raw/main/data/update.json";
+				String configUrl = "https://raw.githubusercontent.com/Oridoshi/Machine/main/data/update.json";
 
 				// Récupérer le contenu du fichier JSON
 				String jsonContent = fetchJson(configUrl);

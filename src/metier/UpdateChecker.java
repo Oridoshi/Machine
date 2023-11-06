@@ -1,77 +1,54 @@
 package metier;
+import org.json.JSONObject;
 
-import java.io.BufferedReader;
 import java.io.IOException;
-import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.URL;
-import org.json.simple.JSONObject;
-import org.json.simple.parser.JSONParser;
-import java.io.InputStream;
+import java.util.Scanner;
 
 public class UpdateChecker {
     public static void main(String[] args) {
         try {
-            // URL du fichier de configuration
-            String configUrl = "https://github.com/Oridoshi/Machine/raw/main/data/update.json";
-            
-            // Récupération du fichier de configuration
-            JSONObject config = fetchConfig(configUrl);
+            // URL du fichier de configuration JSON
+            String configUrl = "https://github.com/Oridoshi/Machine/blob/main/data/update.json";
 
-            if (config != null) {
-                String currentVersion = "1.0.0"; // Version actuelle de votre application
+            // Récupérer le contenu du fichier JSON
+            String jsonContent = fetchJson(configUrl);
 
-                String latestVersion = (String) config.get("version");
-                String updateUrl = (String) config.get("updateUrl");
+            // Analyser le contenu JSON
+            JSONObject jsonObject = new JSONObject(jsonContent);
 
-                if (isUpdateAvailable(currentVersion, latestVersion)) {
-                    System.out.println("Une nouvelle version est disponible : " + latestVersion);
-                    // Vous pouvez ici déclencher la mise à jour en téléchargeant le nouveau fichier JAR depuis updateUrl.
-                } else {
-                    System.out.println("Vous utilisez déjà la dernière version.");
-                }
+            // Extraire la version actuelle de l'application
+            String currentVersion = "1.0.0"; // Vous pouvez obtenir la version actuelle de votre application ici
+
+            // Extraire la version disponible dans le fichier JSON
+            String availableVersion = jsonObject.getString("version");
+
+            // Comparer les versions
+            if (isNewVersionAvailable(currentVersion, availableVersion)) {
+                System.out.println("Une nouvelle version (" + availableVersion + ") est disponible.");
+                // Vous pouvez ici déclencher le processus de mise à jour.
             } else {
-                System.out.println("Impossible de récupérer le fichier de configuration.");
+                System.out.println("Votre application est à jour.");
             }
-        } catch (Exception e) {
+        } catch (IOException e) {
             e.printStackTrace();
         }
     }
 
-    // Vérifie si une mise à jour est disponible
-    private static boolean isUpdateAvailable(String currentVersion, String latestVersion) {
-        // Vous pouvez implémenter votre propre logique de comparaison de versions ici.
-        // Par exemple, en convertissant les versions en objets Version et en les comparant.
-        return !currentVersion.equals(latestVersion);
+    private static String fetchJson(String url) throws IOException {
+        HttpURLConnection connection = (HttpURLConnection) new URL(url).openConnection();
+        connection.setRequestMethod("GET");
+
+        try (Scanner scanner = new Scanner(connection.getInputStream())) {
+            scanner.useDelimiter("\\A");
+            return scanner.hasNext() ? scanner.next() : "";
+        }
     }
 
-    // Récupère le fichier de configuration depuis l'URL
-    private static JSONObject fetchConfig(String url) {
-        try {
-            URL configURL = new URL(url);
-            HttpURLConnection connection = (HttpURLConnection) configURL.openConnection();
-            connection.setRequestMethod("GET");
-
-            int responseCode = connection.getResponseCode();
-            if (responseCode == HttpURLConnection.HTTP_OK) {
-                BufferedReader reader = new BufferedReader(new InputStreamReader(connection.getInputStream()));
-                StringBuilder response = new StringBuilder();
-                String line;
-
-                while ((line = reader.readLine()) != null) {
-                    response.append(line);
-                }
-
-                reader.close();
-                connection.disconnect();
-
-                JSONParser parser = new JSONParser();
-                return (JSONObject) parser.parse(response.toString());
-            }
-        } catch (IOException | org.json.simple.parser.ParseException e) {
-            e.printStackTrace();
-        }
-
-        return null;
+    private static boolean isNewVersionAvailable(String currentVersion, String availableVersion) {
+        // Vous pouvez personnaliser cette logique de comparaison selon vos besoins.
+        // Par exemple, vous pouvez diviser les versions en parties (majeure, mineure, correctif) et les comparer individuellement.
+        return !currentVersion.equals(availableVersion);
     }
 }

@@ -1,4 +1,4 @@
-	package metier;
+package metier;
 
 import org.json.JSONObject;
 import java.io.IOException;
@@ -6,7 +6,7 @@ import java.net.URL;
 import java.util.Scanner;
 
 import javax.net.ssl.HttpsURLConnection;
-import java.io.FileInputStream;
+import java.io.InputStream;
 
 	public class UpdateChecker
 	{
@@ -26,7 +26,7 @@ import java.io.FileInputStream;
 				JSONObject jsonObject = new JSONObject(jsonContent);
 
 				// Extraire la version actuelle de l'application
-				this.currentVersion = (new JSONObject(lireFichier("./data/update.json"))).getString("version");
+				this.currentVersion = (new JSONObject(lireFichier("/update.json"))).getString("version");
 
 				// Extraire la version disponible dans le fichier JSON
 				this.availableVersion = jsonObject.getString("version");
@@ -48,9 +48,10 @@ import java.io.FileInputStream;
 			}
 		}
 
-		private static String lireFichier(String nomFichier) throws IOException
+		private String lireFichier(String nomFichier) throws IOException
 		{
-			try (Scanner scanner = new Scanner(new FileInputStream(nomFichier), "UTF-8"))
+			InputStream ips = this.getClass().getResourceAsStream(nomFichier);
+			try (Scanner scanner = new Scanner(ips, "UTF-8"))
 			{
 				scanner.useDelimiter("\\A");
 				return scanner.hasNext() ? scanner.next() : "";

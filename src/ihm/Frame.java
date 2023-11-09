@@ -38,7 +38,7 @@ public class Frame extends JFrame implements ActionListener
 
 		this.setDefaultCloseOperation(EXIT_ON_CLOSE);
 
-		this.setIconImage(new ImageIcon("./data/icon/icon.png").getImage());
+		this.setIconImage(new ImageIcon(getClass().getResource("/icon/icon.png")).getImage());
 
 		Dimension tailleEcran = Toolkit.getDefaultToolkit().getScreenSize();
 
@@ -86,8 +86,8 @@ public class Frame extends JFrame implements ActionListener
 		JPanel panelOption = new JPanel();
 		panelOption.setBackground(new Color(31, 31, 31));
 		BtnGrpPerso grpOption = new BtnGrpPerso();
-		grpOption.add(new BtnIconPerso("./data/img/table/table_(2).png", "./data/img/table/table_(1).png", "./data/img/table/table_(3).png", this, "table"));
-		grpOption.add(new BtnIconPerso("./data/img/eco/eco_(2).png"    , "./data/img/eco/eco_(1).png"    , "./data/img/eco/eco_(3).png", this, "eco"));
+		grpOption.add(new BtnIconPerso("/img/table/table_(2).png", "/img/table/table_(1).png", "/img/table/table_(3).png", this, "table"));
+		grpOption.add(new BtnIconPerso("/img/eco/eco_(2).png"    , "/img/eco/eco_(1).png"    , "/img/eco/eco_(3).png", this, "eco"));
 		panelOption.add(grpOption.ajouterFrame());
 		this.add(panelOption, BorderLayout.WEST);
 

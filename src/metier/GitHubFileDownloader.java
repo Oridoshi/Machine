@@ -9,8 +9,8 @@ public class GitHubFileDownloader {
 
 	public GitHubFileDownloader()
 	{
-		String githubUrl = "https://github.com/Oridoshi/Machine/raw/main/Machine.jar";
-		String destinationPath = "Machine.jar";
+		String githubUrl = "https://github.com/Oridoshi/Machine/raw/main/Machine.exe";
+		String destinationPath = "Machine.exe";
 
 		try
 		{

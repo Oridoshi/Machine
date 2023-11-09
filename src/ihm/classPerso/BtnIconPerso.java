@@ -24,9 +24,9 @@ public class BtnIconPerso extends BtnPerso
 		this.pan  = pan;
 		this.mere = mere;
 		
-		ImageIcon tmpImgHover     = new ImageIcon(imgHover);
-		ImageIcon tmpImgSelect    = new ImageIcon(imgSelect);
-		ImageIcon tmpImgNonSelect = new ImageIcon(imgNonSelect);
+		ImageIcon tmpImgHover     = new ImageIcon(getClass().getResource(imgHover));
+		ImageIcon tmpImgSelect    = new ImageIcon(getClass().getResource(imgSelect));
+		ImageIcon tmpImgNonSelect = new ImageIcon(getClass().getResource(imgNonSelect));
 
 		Image imageResizeHover     = tmpImgHover.getImage();
 		Image imageResizeSelect    = tmpImgSelect.getImage();

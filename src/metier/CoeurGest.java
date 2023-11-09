@@ -19,7 +19,7 @@ public class CoeurGest
 	{
 		try
 		{
-			this.connexion = DriverManager.getConnection(urlBaseDeDonné, utilisateur, new JSONObject(lireFichier("/mdp.json")).getString("version"));
+			this.connexion = DriverManager.getConnection(urlBaseDeDonné, utilisateur, new JSONObject(lireFichier("/mdp.json")).getString("mdp"));
 			System.out.println("DEBUG : CONNECTION ETABLI");
 		}
 		catch (SQLException e)

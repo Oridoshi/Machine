@@ -67,7 +67,7 @@ public class Frame extends JFrame implements ActionListener
 		panSud.setLayout(new FlowLayout(FlowLayout.LEFT));
  
 		this.boutonAjouterClient = new JButton("Ajouter/Mise a jour Client");
-		this.boutonAjouterClient.setForeground(new Color(0, 220, 254));
+		this.boutonAjouterClient.setForeground(new Color(156, 220, 254));
 		this.boutonAjouterClient.setBackground(new Color(51, 51, 51));
 		this.boutonAjouterClient.setBorderPainted(false);
 		this.boutonAjouterClient.setFocusPainted(false);

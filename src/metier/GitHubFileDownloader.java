@@ -10,7 +10,7 @@ public class GitHubFileDownloader {
 	public GitHubFileDownloader()
 	{
 		String githubUrl = "https://github.com/Oridoshi/Machine/raw/main/Machine.exe";
-		String destinationPath = "Machine.exe";
+		String destinationPath = "./Machine.exe";
 
 		try
 		{

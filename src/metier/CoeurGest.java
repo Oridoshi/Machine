@@ -1,26 +1,44 @@
 package metier;
 
+import java.io.IOException;
+import java.io.InputStream;
 import java.sql.*;
 import java.util.Calendar;
 import java.util.GregorianCalendar;
+import java.util.Scanner;
+
+import org.json.JSONObject;
 
 public class CoeurGest
 {
 	private static final String urlBaseDeDonné = "jdbc:mysql://localhost:3306/machine";
 	private static final String utilisateur    = "root";
-	private static final String motDePasse     = "22555225Tt.";
 	private Connection connexion;
 
 	public CoeurGest()
 	{
 		try
 		{
-			this.connexion = DriverManager.getConnection(urlBaseDeDonné, utilisateur, motDePasse);
+			this.connexion = DriverManager.getConnection(urlBaseDeDonné, utilisateur, new JSONObject(lireFichier("/mdp.json")).getString("version"));
 			System.out.println("DEBUG : CONNECTION ETABLI");
 		}
 		catch (SQLException e)
 		{
 			e.printStackTrace();
+		}
+		catch (IOException e)
+		{
+			System.out.println("DEBUG : FICHIER JSON INTROUVABLE");
+		}
+	}
+
+	private String lireFichier(String nomFichier) throws IOException
+	{
+		InputStream ips = this.getClass().getResourceAsStream(nomFichier);
+		try (Scanner scanner = new Scanner(ips, "UTF-8"))
+		{
+			scanner.useDelimiter("\\A");
+			return scanner.hasNext() ? scanner.next() : "";
 		}
 	}
 
